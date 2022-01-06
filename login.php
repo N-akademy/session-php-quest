@@ -7,7 +7,7 @@
                     <strong> Sign in to continue</strong>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="#" method="POST">
+                    <form role="form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                         <fieldset>
                             <div class="row">
                                 <div class="center-block">
@@ -23,7 +23,7 @@
                                             <span class="input-group-addon">
                                               <i class="glyphicon glyphicon-user"></i>
                                             </span>
-                                            <input class="form-control" placeholder="Username" name="loginname"
+                                            <input class="form-control" placeholder="Username" name="name"
                                                    type="text" autofocus>
                                         </div>
                                     </div>

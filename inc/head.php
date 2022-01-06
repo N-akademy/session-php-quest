@@ -1,3 +1,30 @@
+<?php
+
+
+    session_start();
+
+/*Login*/
+if(!empty($_POST['name'])){
+    $_SESSION['name'] = $_POST['name'];
+    header('Location:/');
+    die;
+}
+
+if(isset($_GET['add_to_cart'])){
+    $idProduct = $_GET['add_to_cart'];
+    /*pannier vide*/
+    if(!isset($_SESSION['cart'])){
+        $_SESSION['cart'] = [];
+    }
+    if(!isset($_SESSION['cart'][$idProduct])){
+        $_SESSION['cart'][$idProduct] = 1;
+    }else{
+        $_SESSION['cart'][$idProduct]++;
+    }
+    header('Location:/');
+    die;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +57,6 @@
                     <h1>The Cookies Factory</h1>
                 </a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -43,11 +69,20 @@
                             Cart
                         </a>
                     </li>
+                    <?php if(!isset($_SESSION['name'])){ ?>
+                        <li><a href = '../login.php'>Login</a></li>
+                    <?php } ?>
+
+                    <?php if(isset($_SESSION['name'])){ ?>
+                        <li><a href = '../logout.php'>Logout</a></li>
+                    <?php } ?>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container-fluid text-right">
-        <strong>Hello Wilder !</strong>
+    <?php if(isset($_SESSION['name'])){ ?>
+        <strong>Hello <?= $_SESSION['name'] ?? 'Wilders'?>!</strong>
+    <?php } ?>
     </div>
 </header>
